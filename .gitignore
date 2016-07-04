@@ -15,3 +15,5 @@
 /vendor/
 /web/bundles/
 .idea/
+Supprimerait composer.lock
+Supprimerait tests/
