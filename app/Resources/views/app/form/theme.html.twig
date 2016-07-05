@@ -1,0 +1,9 @@
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif %}
+{%- endblock form_errors %}
