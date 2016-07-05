@@ -66,3 +66,112 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            uploadable: true
+            timestampable: true
+            sluggable: true
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        large:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+
+        small:
+            quality: 75
+            filters:
+                thumbnail: { size: [88, 88], mode: outbound }
+
+        logo_small:
+            quality: 75
+            filters:
+                thumbnail: { size: [195, 142], mode: outbound }
+                upscale: { min: [195, 142] }
+
+        map_small:
+            quality: 75
+            filters:
+                thumbnail: { size: [135, 133], mode: outbound }
+                upscale: { min: [135, 133] }
+
+        slide_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [1120, 480], mode: outbound }
+                upscale: { min: [1120, 480] }
+        article_show:
+            quality: 100
+            filters:
+                thumbnail: { size: [210, 140], mode: outbound }
+                upscale: { min: [210, 140] }
+        article_index:
+            quality: 100
+            filters:
+                thumbnail: { size: [390, 246], mode: outbound }
+                upscale: { min: [390, 246] }
+        useful_link_index:
+            quality: 100
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+                upscale: { min: [100, 100] }
+        download_index:
+            quality: 100
+            filters:
+                thumbnail: { size: [154, 110], mode: outbound }
+                upscale: { min: [154, 100] }
+        statistic_regional:
+            quality: 100
+            filters:
+                thumbnail: { size: [154, 110], mode: outbound }
+                upscale: { min: [154, 100] }
+        formation:
+            quality: 100
+            filters:
+                thumbnail: { size: [154, 110], mode: outbound }
+                upscale: { min: [154, 100] }
+        banner_home:
+            quality: 100
+            filters:
+                thumbnail: { size: [830, 150], mode: outbound }
+                upscale: { min: [830, 150] }
+        banner_header:
+            quality: 100
+            filters:
+                thumbnail: { size: [710, 110], mode: outbound }
+                upscale: { min: [710, 110] }
+        thumb_home:
+            quality: 100
+            filters:
+                thumbnail: { size: [90, 90], mode: outbound }
+                upscale: { min: [90, 90] }
+        thumb_ca_web:
+            quality: 100
+            filters:
+                thumbnail: { size: [195, 142], mode: outbound }
+                upscale: { min: [195, 142] }
+
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: page
+        sort_field_name: sort
+        sort_direction_name: direction
+        distinct: true
+    template:
+        pagination: "%kernel.root_dir%/Resources/views/app/common/components/_pagination.html.twig"
+        sortable: "KnpPaginatorBundle:Pagination:sortable_link.html.twig"
