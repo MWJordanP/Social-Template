@@ -10,7 +10,7 @@ var LoginModalController = {
     hidePassword: null,
 
     activeTab: null,
-    tabSelection: 0, // 0 - first, 1 - second
+    tabSelection: 0,
 
     findElements: function () {
         var base = this;
