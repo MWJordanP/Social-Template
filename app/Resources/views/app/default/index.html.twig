@@ -1,0 +1,6 @@
+{% extends '_layout_login.html.twig' %}
+
+{% block content %}
+    {{ render(controller('FOSUserBundle:Security:login')) }}
+    {{ render(controller('FOSUserBundle:Registration:register')) }}
+{% endblock content %}

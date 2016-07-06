@@ -3,4 +3,15 @@ imports:
     - { resource: manager.yml }
     - { resource: listener.yml }
 
+parameters:
+     social_template.registrationconfirm.listener: AppBundle\EventListener\SuccessAuthentificationListener
+     social_template.translator: Symfony\Component\Translation\Translator
+
 services:
+    social_template.registration_complet:
+        class: "%social_template.registrationconfirm.listener%"
+        arguments:
+            - "@router"
+            - "%social_template.translator%"
+        tags:
+            - { name: kernel.event_subscriber }

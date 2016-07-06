@@ -7,26 +7,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 text">
-                        <h1><strong>Bootstrap</strong> Login Form</h1>
-                        <div class="description">
-                            <p>
-                                This is a free responsive login form made with Bootstrap.
-                                Download it on <a href="http://azmind.com"><strong>AZMIND</strong></a>, customize and use it as you like!
-                            </p>
-                        </div>
+                        <h1> Register Form</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 form-box">
-                        <div class="form-top">
-                            <div class="form-top-left">
-                                <h3>Login to our site</h3>
-                                <p>Enter your username and password to log on:</p>
-                            </div>
-                            <div class="form-top-right">
-                                <i class="fa fa-lock"></i>
-                            </div>
-                        </div>
                         <div class="form-bottom">
                             {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
                             {{ form_row(form.email, {'attr' : { 'placeholder': 'form.email'|trans }}) }}
@@ -34,7 +19,7 @@
                             {{ form_row(form.plainPassword.first, {'attr' : { 'placeholder': 'form.password'|trans }}) }}
                             {{ form_row(form.plainPassword.second, {'attr' : { 'placeholder': 'form.password_confirmation'|trans }}) }}
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary uppercase" value="{{ 'registration.submit'|trans }}" />
+                                <button type="submit" class="btn btn-primary uppercase" >{{ 'registration.submit'|trans }}</button>
                             </div>
                             {{ form_end(form) }}
                         </div>
@@ -42,7 +27,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 social-login">
-                        <h3>...or login with:</h3>
+                        <h3>...or register with:</h3>
                         <div class="social-login-buttons">
                             <a class="btn btn-link-2" href="#">
                                 <i class="fa fa-facebook"></i> Facebook
