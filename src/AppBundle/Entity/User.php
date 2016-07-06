@@ -39,6 +39,12 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\s", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $file;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -52,5 +58,25 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     *
+     * @return User
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
     }
 }

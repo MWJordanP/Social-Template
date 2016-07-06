@@ -5,13 +5,17 @@ imports:
 
 parameters:
      social_template.registrationconfirm.listener: AppBundle\EventListener\SuccessAuthentificationListener
-     social_template.translator: Symfony\Component\Translation\Translator
 
 services:
     social_template.registration_complet:
         class: "%social_template.registrationconfirm.listener%"
         arguments:
             - "@router"
-            - "%social_template.translator%"
+            - "@translator.default"
         tags:
             - { name: kernel.event_subscriber }
+
+    app.form.profile:
+        class: AppBundle\Form\ProfileType
+        tags:
+            - { name: form.type, alias: app_user_profile }

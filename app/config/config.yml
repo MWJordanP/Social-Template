@@ -40,6 +40,7 @@ twig:
         - 'app/form/form.html.twig'
         - 'app/form/form_bootstrap.html.twig'
         - 'app/form/theme.html.twig'
+        - 'VichUploaderBundle:Form:fields.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -79,10 +80,23 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
 
+vich_uploader:
+    db_driver: orm
+    mappings:
+        product_image:
+            uri_prefix:         /download
+            upload_destination: "%kernel.root_dir%/../web/download"
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+
 fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type: AppBundle\Form\ProfileType
 
 liip_imagine:
     resolvers:

@@ -7,7 +7,7 @@ use FOS\UserBundle\Event\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\Translator;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 
 class SuccessAuthentificationListener implements EventSubscriberInterface
 {
