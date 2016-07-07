@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -30,6 +31,7 @@ class Image
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
      *
      * @var Image
+     * @Assert\NotBlank()
      */
     protected $imageFile;
 
