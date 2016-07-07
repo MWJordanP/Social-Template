@@ -6,7 +6,7 @@ body {
     color: #888;
     line-height: 30px;
     text-align: center;
-	background: url("../../image/O7MF5N0.jpg");
+	background: url("../../image/O7MF5N0.jpg") fixed;
 	background-size: cover;
 }
 

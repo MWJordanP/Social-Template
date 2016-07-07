@@ -17,6 +17,7 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 use_referer:         false
+                success_handler:     login_success_handler
             logout:       true
             anonymous:    true
         dev:

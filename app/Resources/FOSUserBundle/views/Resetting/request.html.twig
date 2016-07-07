@@ -1,0 +1,35 @@
+{% extends '_layout_login.html.twig' %}
+
+{% block content %}
+    <div class="top-content">
+
+        <div class="inner-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1> Resseting Form</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 form-box">
+                        <div class="form-bottom">
+                            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="">
+                                <div class="form-group">
+                                    {% if invalid_username is defined %}
+                                        <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                                    {% endif %}
+                                    <input type="text" id="username" name="username" class="form-control" required="required"
+                                           placeholder="{{ 'resetting.request.username'|trans }}" />
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary uppercase" >{{ 'resetting.request.submit'|trans }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

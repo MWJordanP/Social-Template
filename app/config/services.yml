@@ -2,20 +2,23 @@ imports:
     - { resource: twig.yml }
     - { resource: manager.yml }
     - { resource: listener.yml }
+    - { resource: form.yml }
 
 parameters:
-     social_template.registrationconfirm.listener: AppBundle\EventListener\SuccessAuthentificationListener
+     social_template.registration_confirm.listener: AppBundle\EventListener\SuccessAuthentificationListener
 
 services:
     social_template.registration_complet:
-        class: "%social_template.registrationconfirm.listener%"
+        class: "%social_template.registration_confirm.listener%"
         arguments:
             - "@router"
             - "@translator.default"
         tags:
             - { name: kernel.event_subscriber }
 
-    app.form.profile:
-        class: AppBundle\Form\ProfileType
-        tags:
-            - { name: form.type, alias: app_user_profile }
+    login_success_handler:
+        class:      AppBundle\Security\Authentication\Handler\LoginSuccessHandler
+        arguments:
+            - "@router"
+            - "@security.authorization_checker"
+            - "@doctrine.orm.entity_manager"
