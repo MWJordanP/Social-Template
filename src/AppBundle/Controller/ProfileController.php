@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Publication;
+use AppBundle\Entity\User;
 use AppBundle\Form\PublicationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,6 +43,35 @@ class ProfileController extends Controller
         return $this->render('app/profile/index.html.twig', [
             'form' => $form->createView(),
             'publications' => $publications,
+        ]);
+    }
+
+    /**
+     * @Route("/profil/{id}", options = { "expose" = true }, name="homepage_connect_profile_show")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction(User $user, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $publications = $em->getRepository('AppBundle:Publication')->findByUser($user);
+        $publication = new Publication();
+
+        $form = $this->createForm(PublicationType::class, $publication);
+        $form->handleRequest($request);
+        if ($request->isMethod('POST') && $form->isValid()) {
+            $publication->setUser($user);
+            $em->persist($publication);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('homepage_connect_profile_show', ['id' => $user->getId()]));
+        }
+
+        return $this->render('app/profile/show.html.twig', [
+            'publications' => $publications,
+            'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 }

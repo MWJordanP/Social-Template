@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p class="lead">
+                        <img src="{{ asset('image/anonyme.png') }}" class="img-responsive">
+                        {{ user.username }}
+                    </p>
+                    <p>45 Followers, 13 Posts</p>
+                    <p>
+                        <img src="https://lh6.googleusercontent.com/-5cTTMHjjnzs/AAAAAAAAAAI/AAAAAAAAAFk/vgza68M4p2s/s28-c-k-no/photo.jpg" width="28px" height="28px">
+                        <img src="https://lh4.googleusercontent.com/-6aFMDiaLg5M/AAAAAAAAAAI/AAAAAAAABdM/XjnG8z60Ug0/s28-c-k-no/photo.jpg" width="28px" height="28px">
+                        <img src="https://lh4.googleusercontent.com/-9Yw2jNffJlE/AAAAAAAAAAI/AAAAAAAAAAA/u3WcFXvK-g8/s28-c-k-no/photo.jpg" width="28px" height="28px">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            {% block view %}
+                {% include 'app/publication/form.html.twig' with {'form': form } %}
+                {% for publication in publications %}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {{ publication.content }}
+                            <a href="{{ path('comment_new', {'id': publication.id}) }}" class="btn btn-primary">Voir</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endblock %}
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="#">Twitter</a> <small class="text-muted">|</small> <a href="#">Facebook</a> <small class="text-muted">|</small> <a href="#">Google+</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <h4 class="text-center">
+        <a href="http://bootply.com/96266" target="ext">Download this Template @Bootply</a>
+    </h4>
+{% endblock content %}

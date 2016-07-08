@@ -292,3 +292,6 @@ small.text-muted {
         margin-right: 0px;
     }
 }
+.ui-front {
+    z-index: 10000;
+}
