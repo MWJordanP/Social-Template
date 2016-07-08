@@ -54,24 +54,15 @@ class ProfileController extends Controller
      */
     public function showAction(User $user, Request $request)
     {
+        $userInProgress = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $publications = $em->getRepository('AppBundle:Publication')->findByUser($user);
-        $publication = new Publication();
-
-        $form = $this->createForm(PublicationType::class, $publication);
-        $form->handleRequest($request);
-        if ($request->isMethod('POST') && $form->isValid()) {
-            $publication->setUser($user);
-            $em->persist($publication);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('homepage_connect_profile_show', ['id' => $user->getId()]));
-        }
+        $likeUserInProgress = $em->getRepository('AppBundle:Social')->findOneBy(['user' => $userInProgress, 'userSocial' => $user]);
 
         return $this->render('app/profile/show.html.twig', [
             'publications' => $publications,
-            'form' => $form->createView(),
             'user' => $user,
+            'likeUserInProgress' => $likeUserInProgress,
         ]);
     }
 }

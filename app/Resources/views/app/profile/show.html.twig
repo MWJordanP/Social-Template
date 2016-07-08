@@ -9,7 +9,12 @@
                         <img src="{{ asset('image/anonyme.png') }}" class="img-responsive">
                         {{ user.username }}
                     </p>
-                    <p>45 Followers, 13 Posts</p>
+                    {% if likeUserInProgress is null %}
+                        <a href="{{ path('like_profile', {'id': user.id}) }}" class="btn btn-primary">Like</a>
+                    {% else %}
+                        <a href="{{ path('like_profile', {'id': user.id}) }}" class="btn btn-danger">Dislike</a>
+                    {% endif %}
+                    <p>{{ user.socials|length }} Like</p>
                     <p>
                         <img src="https://lh6.googleusercontent.com/-5cTTMHjjnzs/AAAAAAAAAAI/AAAAAAAAAFk/vgza68M4p2s/s28-c-k-no/photo.jpg" width="28px" height="28px">
                         <img src="https://lh4.googleusercontent.com/-6aFMDiaLg5M/AAAAAAAAAAI/AAAAAAAABdM/XjnG8z60Ug0/s28-c-k-no/photo.jpg" width="28px" height="28px">
@@ -20,12 +25,10 @@
         </div>
         <div class="col-sm-7">
             {% block view %}
-                {% include 'app/publication/form.html.twig' with {'form': form } %}
                 {% for publication in publications %}
                     <div class="panel panel-default">
                         <div class="panel-body">
                             {{ publication.content }}
-                            <a href="{{ path('comment_new', {'id': publication.id}) }}" class="btn btn-primary">Voir</a>
                         </div>
                     </div>
                 {% endfor %}
