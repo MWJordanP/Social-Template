@@ -1,0 +1,9 @@
+services:
+    app.cgu.listener:
+        class: AppBundle\EventListener\ConnectListener
+        arguments:
+            - "@router"
+            - "@security.token_storage"
+            - "@security.authorization_checker"
+        tags:
+            - { name: kernel.event_subscriber }
