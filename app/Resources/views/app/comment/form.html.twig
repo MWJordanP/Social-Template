@@ -1,0 +1,25 @@
+{% extends 'app/profile/index.html.twig' %}
+{% block view %}
+<div class="well">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="{{ path('homepage_connect_profile') }}">Revenir à mes publications</a>
+        </div>
+        <div class="panel-body">
+            {{ publication.content }}
+            <hr>
+            {{ form_start(form) }}
+            {{ form_rest(form) }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {{ form_end(form) }}
+        </div>
+        <div class="panel-footer">
+            {% for comment in comments %}
+                <div class="well">
+                    {{ comment.content }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock view %}

@@ -19,15 +19,17 @@
             </div>
         </div>
         <div class="col-sm-7">
-
-            {% include 'app/publication/form.html.twig' with {'form': form } %}
-            {% for publication in publications %}
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        {{ publication.content }}
+            {% block view %}
+                {% include 'app/publication/form.html.twig' with {'form': form } %}
+                {% for publication in publications %}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {{ publication.content }}
+                            <a href="{{ path('comment_new', {'id': publication.id}) }}" class="btn btn-primary">Voir</a>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% endblock %}
 
         </div>
     </div>

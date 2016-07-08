@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Publication;
 use AppBundle\Form\CommentType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,41 +20,34 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentController extends Controller
 {
     /**
-     * @Route("/{id}", name="comment_form")
-     * @param Publication $id
+     * @Route("/{id}", name="comment_new")
+     * @param Publication $publication
      * @param Request     $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Publication $publication, Request $request)
+    public function newAction(Publication $publication, Request $request)
     {
-        if (!$request->isXmlHttpRequest()) {
-            return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
-        }
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+        $comments = $em->getRepository('AppBundle:Comment')->findByPublication($publication);
         $comment = new Comment();
 
-        $form = $this->createForm(CommentType::class, $comment, ['action' => $this->generateUrl('comment_form'), 'method' => 'POST']);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($request->isMethod('POST') && $form->isValid()) {
             $comment->setUser($user);
-            $comment->setUser($publication);
+            $comment->setPublication($publication);
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('homepage_connect_profile'));
+            return $this->redirect($this->generateUrl('comment_new', ['id' => $publication->getId()]));
         }
 
-        $response = new JsonResponse(
-            array(
-                'message' => 'Error',
-                'form' => $this->renderView('app/comment/form.html.twig',
-                    array(
-                        'entity' => $comment,
-                        'form' => $form->createView(),
-                    ))), 400);
-
-        return $response;
+        return $this->render('app/comment/form.html.twig', [
+            'form' => $form->createView(),
+            'publication' => $publication,
+            'comments' => $comments,
+        ]);
     }
 }
